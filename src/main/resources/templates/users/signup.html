@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"> <!-- External CSS 파일 연결 -->
+</head>
+<body>
+<!-- Header Section -->
+<header class="navbar">
+    <div class="logo">
+        <a href="/"> <!-- 로고 클릭 시 index.html로 이동 -->
+            <img src="../static/images/MODUNURI.png" class="logo img"> <!-- 이미지 추가 -->
+            MODUNURI
+        </a>
+    </div>
+    <form class="search-container" action="/search" method="GET">
+        <input type="text" placeholder="Search..." class="search-input" name="query">
+    </form>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="/users/Search">지역 별 검색</a></li>
+            <li><a href="#">무장애 정보 검색</a></li>
+            <li><a href="#" id="community-link">지도로 찾기</a></li>
+            <li><a href="#">여행 기록하기</a></li>
+            <!-- 로그인 상태 확인 -->
+            <li class="nav-item-right">
+                <span th:if="${username != null}">
+                    <a href="/users/mypage" class="auth-button">My Page</a> <!-- My Page 버튼 추가 -->
+                    <a class="login-message" th:text="${username} + '님 안녕하세요'"></a>
+                    <a href="/users/logout" class="auth-button">Logout</a>
+                </span>
+                <span th:if="${username == null}">
+                    <a class="login-message" th:text="'로그인을 해주세요'"></a>
+                    <a href="/users/signup" class="auth-button">Sign Up</a>
+                    <a href="/users/login" class="auth-button">Log In</a> <!-- Log In 버튼 추가 -->
+                </span>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="back-container">
+    <div class="content-container">
+        <div class="signup-container">
+            <h1>Sign Up</h1>
+                <form action="/users/signup" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit" class="signup-button">Sign Up</button>
+                </form>
+            <a href="/users/login" class="link-to-login">Already have an account? Log In</a>
+            </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-links">
+        <ul>
+            <li><p>(주)코뿔소코퍼레이션</p></li>
+
+        </ul>
+    </div>
+</footer>
+<script src="/static/script/script.js"></script>
+</body>
+</html>
